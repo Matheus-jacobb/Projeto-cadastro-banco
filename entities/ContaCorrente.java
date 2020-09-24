@@ -1,3 +1,4 @@
+package entities;
 public class ContaCorrente {
     
     private String cliente;
@@ -26,10 +27,6 @@ public class ContaCorrente {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
     public double getLimiteEspecial() {
         return limiteEspecial;
     }
@@ -40,7 +37,7 @@ public class ContaCorrente {
 
     public void depositar (double valor){
         this.saldo += valor;
-        System.out.println("Deposito feito! ");
+        System.out.println("Deposito realizado com sucesso! ");
     }
 
     public void saque (double valor){
@@ -57,7 +54,13 @@ public class ContaCorrente {
 
     @Override
     public String toString() {
-        return "ContaCorrente [cliente=" + cliente + ", limiteEspecial=" + limiteEspecial + ", numeroConta="
-                + numeroConta + ", saldo=" + saldo + "]";
+        return "Dados da conta->[Cliente=" + cliente + ", LimiteEspecial=R$" + limiteEspecial + ", numeroConta="
+                + numeroConta + ", saldo=R$" + saldo + "]";
     }
+
+    public ContaCorrente(String cliente, int numeroConta) {
+        this.cliente = cliente;
+        this.numeroConta = numeroConta;
+    }
+
 }

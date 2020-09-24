@@ -1,5 +1,9 @@
+package application;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import entities.ContaCorrente;
 
 public class TesteContaCorrente {
     
@@ -12,23 +16,22 @@ public class TesteContaCorrente {
         double limite_aux;
 
         do{
-        System.out.println("**Menu**\n[1]-Cadastro\n[2]-Deposito\n[3]-Saque\n[4]Ver saldo\n[5]-Somatorio Especial\n[6]-Sair");
+        System.out.println("------MENU------\n[1]-Cadastro\n[2]-Deposito\n[3]-Saque\n[4]-Ver saldo\n[5]-Somatorio Especial\n[6]-Sair");
         System.out.print("->");
         op = Integer.parseInt(sc.nextLine());
 
         switch (op) {
             case 1:
-                ContaCorrente n = new ContaCorrente();
-                System.out.println("\nNome do cliente: ");
-                n.setCliente(sc.nextLine());                    //Nome do cliente
-                n.setNumeroConta(1+aux);                        //Numero da conta
-                System.out.println("Valor do especial (+): ");  //Limite do especial
+                System.out.print("\nNome do cliente: ");
+                String name = sc.nextLine();
+                ContaCorrente n = new ContaCorrente(name,1+aux);
+                System.out.print("Valor do especial (+): ");  //Limite do especial
                 do{
                     limite_aux = Double.parseDouble(sc.nextLine());
                 }while(limite_aux < 0);
                 n.setLimiteEspecial(limite_aux);
                 contas.add(n);
-                System.out.println("[Dados da Conta]: ");
+                System.out.println("**Conta criada com sucesso!**");
                 System.out.println(n);
                 System.out.print("\n---Aperte Enter to continue---");
                 sc.nextLine();
@@ -38,9 +41,9 @@ public class TesteContaCorrente {
             case 2:
             case 3:
                 if(op==2)
-                System.out.println("-----Deposito-----\nNumero da conta: ");
+                System.out.print("-----Deposito-----\nNumero da conta: ");
                 else
-                System.out.println("-----Saque-----\nNumero da conta: ");
+                System.out.print("-----Saque-----\nNumero da conta: ");
 
                 int numero_aux = Integer.parseInt(sc.nextLine());
                 numero_aux--;
@@ -49,13 +52,13 @@ public class TesteContaCorrente {
                     }
                     else if(contas.get(numero_aux).getNumeroConta() ==  numero_aux + 1){
                         if(op == 2){
-                        System.out.println("Valor de deposito(R$) : ");
+                        System.out.print("Valor de deposito(R$) : ");
                         int valorDeposito = Integer.parseInt(sc.nextLine());
                         contas.get(numero_aux).depositar(valorDeposito);
                         System.out.println(contas.get(numero_aux));
                         }
                         else{
-                            System.out.println("Valor de saque(R$) : ");
+                            System.out.print("Valor de saque(R$) : ");
                             int valorSaque = Integer.parseInt(sc.nextLine());
                             contas.get(numero_aux).saque(valorSaque);
                             System.out.println(contas.get(numero_aux));
@@ -66,6 +69,7 @@ public class TesteContaCorrente {
             break;
 
             case 4:
+            System.out.print("Numero da conta: ");
             int numero = Integer.parseInt(sc.nextLine());
             numero--;
                 if(numero + 1 > contas.size())
